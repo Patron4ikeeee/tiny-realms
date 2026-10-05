@@ -1,5 +1,5 @@
 /* Paste your Render URL into this line after deploying the server. */
-const SERVER_URL = 'https://YOUR-SERVICE.onrender.com';
+const SERVER_URL = 'https://tiny-realms.onrender.com';
 const TILE = 32;
 const canvas = document.getElementById('world');
 const ctx = canvas.getContext('2d');
