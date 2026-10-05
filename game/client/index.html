@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#17231e">
+  <title>Тихие земли — MMO RPG</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main id="login-screen" class="login-screen">
+    <section class="login-card">
+      <div class="logo">✦</div>
+      <p class="eyebrow">МАЛЕНЬКИЕ ЗЕМЛИ, БОЛЬШИЕ ПРИКЛЮЧЕНИЯ</p>
+      <h1>Тихие земли</h1>
+      <p class="muted">Придумай игровой ник и отправляйся в общий мир.</p>
+      <form id="login-form">
+        <label for="nickname">Игровой ник</label>
+        <input id="nickname" name="nickname" minlength="3" maxlength="16" pattern="[A-Za-z0-9_]{3,16}" autocomplete="nickname" placeholder="Например, ForestFox" required>
+        <button class="primary" type="submit">Войти в мир</button>
+      </form>
+      <p id="connection-status" class="status">Подключаемся к серверу…</p>
+      <p class="tiny">Без пароля. Прогресс сохраняется на сервере.</p>
+    </section>
+  </main>
+
+  <div id="game-screen" class="game-screen hidden">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Тихие земли">✦ <span>Тихие земли</span></a>
+      <div class="player-stats">
+        <span id="player-name">Игрок</span>
+        <span id="level">Ур. 1</span>
+        <span class="health"><span id="hp-text">100/100</span><span class="bar"><i id="hp-bar"></i></span></span>
+        <span>⚔ <b id="attack">5</b></span>
+        <span>🛡 <b id="defense">0</b></span>
+        <span>🪙 <b id="gold">0</b></span>
+      </div>
+      <button id="logout" class="quiet-button" type="button" title="Отключиться">↪</button>
+    </header>
+    <div class="layout">
+      <section class="world-column">
+        <div class="world-frame">
+          <canvas id="world" width="768" height="512" aria-label="Игровой мир"></canvas>
+          <div class="world-tip">WASD — движение · клик — атака · подойди и нажми E — NPC</div>
+          <div id="notice" class="notice hidden"></div>
+        </div>
+        <div class="xp-row"><span>Опыт</span><div class="xp-track"><i id="xp-bar"></i></div><span id="xp-text">0 / 100</span></div>
+        <div class="chat-box">
+          <div id="chat-messages" class="chat-messages" aria-live="polite"></div>
+          <form id="chat-form"><input id="chat-input" maxlength="180" placeholder="Написать в общий чат…" autocomplete="off"><button type="submit">Отправить</button></form>
+        </div>
+      </section>
+      <aside class="sidebar">
+        <nav class="tabs" aria-label="Меню игры">
+          <button class="tab active" data-tab="inventory">Рюкзак</button>
+          <button class="tab" data-tab="quests">Задания</button>
+          <button class="tab" data-tab="home">Дом</button>
+        </nav>
+        <section id="panel-inventory" class="panel"></section>
+        <section id="panel-quests" class="panel hidden"></section>
+        <section id="panel-home" class="panel hidden"></section>
+        <div class="online-card"><span class="online-dot"></span> В мире: <b id="online-count">1</b> игрок(ов)</div>
+        <p class="side-hint">Подойди к цветному NPC и нажми <kbd>E</kbd>, чтобы взять задание или открыть магазин.</p>
+      </aside>
+    </div>
+  </div>
+
+  <dialog id="npc-dialog" class="dialog">
+    <form method="dialog"><button class="close" aria-label="Закрыть">×</button></form>
+    <div id="npc-content"></div>
+  </dialog>
+
+  <script src="https://cdn.socket.io/4.8.1/socket.io.min.js" crossorigin="anonymous"></script>
+  <script src="game.js"></script>
+</body>
+</html>
